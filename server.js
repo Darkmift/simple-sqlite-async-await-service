@@ -10,14 +10,12 @@ app.get('/', async (req, res, next) => {
     try {
         const db = await dbConn();
         const result = await db.all('SELECT * FROM test');
-        res.json({ message: 'Ok', result });
+        res.json({ result });
     } catch (error) {
-        res.end(error);
+        res.send(error);
     }
 });
 
 const HTTP_PORT = process.env.PORT || 8000;
 // Start server
-app.listen(HTTP_PORT, () => {
-    console.log('Server running on port %PORT%'.replace('%PORT%', HTTP_PORT));
-});
+app.listen(HTTP_PORT, () => console.log(`Server running on port ${HTTP_PORT}`));
